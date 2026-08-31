@@ -1,0 +1,39 @@
+{
+  "tabs": {
+    "list": "მიწისძვრები",
+    "map": "რუკა",
+    "settings": "პარამეტრები"
+  },
+  "list": {
+    "title": "უახლესი მიწისძვრები",
+    "empty": "მონაცემები არ მოიძებნა",
+    "error": "მონაცემების ჩატვირთვა ვერ მოხერხდა",
+    "retry": "სცადეთ ხელახლა"
+  },
+  "event": {
+    "timeUtc": "დრო (UTC):",
+    "timeLocal": "ადგილობრივი დრო:",
+    "magnitude": "მაგნიტუდა:",
+    "depthKm": "სიღრმე (კმ):",
+    "latLong": "გან. / გრძ.:",
+    "region": "რეგიონი:",
+    "notFound": "მოვლენა ვერ მოიძებნა"
+  },
+  "map": {
+    "legend": "ლეგენდა",
+    "legendRecent": "ბოლო 7 დღე",
+    "legendMonth": "ბოლო 3 თვე",
+    "legendOlder": "უფრო ძველი"
+  },
+  "settings": {
+    "preferences": "პარამეტრები",
+    "language": "ენა",
+    "theme": "თემა",
+    "themeSystem": "სისტემური",
+    "themeLight": "ნათელი",
+    "themeDark": "მუქი",
+    "app": "აპლიკაცია",
+    "aboutUs": "ჩვენს შესახებ",
+    "contactUs": "კონტაქტი"
+  }
+}

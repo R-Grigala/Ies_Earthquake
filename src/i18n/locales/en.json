@@ -1,0 +1,39 @@
+{
+  "tabs": {
+    "list": "Earthquakes",
+    "map": "Map",
+    "settings": "Settings"
+  },
+  "list": {
+    "title": "Latest earthquakes",
+    "empty": "No events found",
+    "error": "Could not load data",
+    "retry": "Try again"
+  },
+  "event": {
+    "timeUtc": "Time (UTC):",
+    "timeLocal": "Local time:",
+    "magnitude": "Magnitude:",
+    "depthKm": "Depth (km):",
+    "latLong": "Lat / Long:",
+    "region": "Region:",
+    "notFound": "Event not found"
+  },
+  "map": {
+    "legend": "Legend",
+    "legendRecent": "Last 7 days",
+    "legendMonth": "Last 3 months",
+    "legendOlder": "Older"
+  },
+  "settings": {
+    "preferences": "Preferences",
+    "language": "Language",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "app": "Application",
+    "aboutUs": "About us",
+    "contactUs": "Contact"
+  }
+}
