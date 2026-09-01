@@ -29,10 +29,17 @@
 - `src/config/env.ts` — dev-ში ავტომატურად proxy URL
 - `network_security_config.xml` — Android production build-ისთვის
 
+## ✅ ნაბიჯი 5 — სეისმური რუკა
+
+- `react-native-maps` — MapView, hybrid რუკა
+- `app/(tabs)/map.tsx` — რუკის ეკრანი, loading/error/empty
+- `EarthquakeMap` — GNSMC აიკონები (`Earthquake_gif.gif` / `Earthquake_red.png` / `Earthquake_yellow.png`), callout (დრო, კოორდინატები, მაგნიტუდა, სიღრმე, რეგიონი)
+- `MapLegend` — ასაკის ლეგენდა იგივე აიკონებით (ქართული)
+- `app/(tabs)/_layout.tsx` — events + map ტაბები, `list-outline.png` / `earth-outline.png` აიკონები (`#7a0002` აქტიური ფერი)
+
 ## 🔜 შემდეგი ნაბიჯები
 
-1. `app/(tabs)/map.tsx` — ინტერაქციული რუკა
-2. `app/event/[id].tsx` — მოვლენის დეტალები
-3. `app/(tabs)/settings.tsx` — ენა, თემა
-4. Push ნოტიფიკაციები
-5. Production SSL ან backend proxy ვალიდური სერტიფიკატით
+1. `app/event/[id].tsx` — მოვლენის დეტალები
+2. `app/(tabs)/settings.tsx` — ენა, თემა
+3. Push ნოტიფიკაციები
+4. Production SSL ან backend proxy ვალიდური სერტიფიკატით
