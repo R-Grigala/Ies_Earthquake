@@ -38,4 +38,4 @@ app/     → მხოლოდ ეკრანები
 src/     → API, hooks, components, utils
 ```
 
-მომავალი ტაბები: `events.tsx` ✅, `map.tsx`, `settings.tsx`.
+ტაბები: `events.tsx` ✅, `map.tsx` ✅, `settings.tsx` 🔜.

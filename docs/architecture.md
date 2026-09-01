@@ -66,6 +66,7 @@ events.tsx          →  FlatList + EventListItem
 
 ```
 აპის გახსნა → app/index.tsx → Redirect → /(tabs)/events
+ტაბები: events.tsx ✅, map.tsx ✅
 ```
 
-მომავალში დაემატება: `map.tsx`, `settings.tsx`, `event/[id].tsx`.
+მომავალში დაემატება: `settings.tsx`, `event/[id].tsx`.
