@@ -1,31 +1,42 @@
 import { Image, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { ThemedText } from '@/components/themed-text';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { MARKER_ICONS } from '@/src/utils/markerIcon';
 
-const LEGEND_ITEMS = [
-  { key: 'recent', label: 'ბოლო 7 დღე', source: MARKER_ICONS.recent },
-  { key: 'month', label: '7–91 დღე', source: MARKER_ICONS.month },
-  { key: 'older', label: '91+ დღე', source: MARKER_ICONS.older },
-] as const;
+type MapLegendVariant = 'map' | 'detail';
 
 const ICON_SIZE = 22;
 
-export function MapLegend() {
+type MapLegendProps = {
+  variant?: MapLegendVariant;
+};
+
+export function MapLegend({ variant = 'map' }: MapLegendProps) {
+  const { t } = useTranslation();
   const backgroundColor = useThemeColor({ light: '#ffffffee', dark: '#1e1e22ee' }, 'background');
   const borderColor = useThemeColor({ light: '#c6c6c8', dark: '#3a3a3c' }, 'icon');
   const textColor = useThemeColor({}, 'text');
 
+  const items =
+    variant === 'detail'
+      ? [
+          { key: 'selected', label: t('legend.selected_recent'), source: MARKER_ICONS.recent },
+          { key: 'month', label: t('legend.month'), source: MARKER_ICONS.month },
+          { key: 'older', label: t('legend.older'), source: MARKER_ICONS.older },
+        ]
+      : [
+          { key: 'recent', label: t('legend.recent'), source: MARKER_ICONS.recent },
+          { key: 'month', label: t('legend.month'), source: MARKER_ICONS.month },
+          { key: 'older', label: t('legend.older'), source: MARKER_ICONS.older },
+        ];
+
   return (
     <View style={[styles.container, { backgroundColor, borderColor }]}>
-      {LEGEND_ITEMS.map((item) => (
+      {items.map((item) => (
         <View key={item.key} style={styles.item}>
-          <Image
-            source={item.source}
-            style={styles.icon}
-            resizeMode="contain"
-          />
+          <Image source={item.source} style={styles.icon} resizeMode="contain" />
           <ThemedText style={[styles.label, { color: textColor }]}>{item.label}</ThemedText>
         </View>
       ))}

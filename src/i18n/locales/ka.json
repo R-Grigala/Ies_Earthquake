@@ -1,0 +1,56 @@
+{
+  "tabs": {
+    "events": "მიწისძვრები",
+    "map": "რუკა",
+    "settings": "პარამეტრები"
+  },
+  "events": {
+    "title": "უახლესი მიწისძვრები",
+    "timeUtc": "დრო (UTC):",
+    "magnitude": "მაგნიტუდა:",
+    "location": "მდებარეობა:"
+  },
+  "map": {
+    "title": "სეისმური რუკა"
+  },
+  "eventDetail": {
+    "title": "მიწისძვრა",
+    "timeUtc": "დრო (UTC):",
+    "magnitude": "მაგნიტუდა:",
+    "depthKm": "სიღრმე (კმ):",
+    "coordinates": "გან. / გრძ.:",
+    "location": "მდებარეობა:"
+  },
+  "callout": {
+    "magnitude": "მაგნიტუდა",
+    "timeUtc": "დრო (UTC)",
+    "location": "მდებარეობა",
+    "details": "დეტალურად"
+  },
+  "legend": {
+    "recent": "ბოლო 7 დღე",
+    "month": "7–91 დღე",
+    "older": "91+ დღე",
+    "selected_recent": "არჩეული / ბოლო 7 დღე"
+  },
+  "settings": {
+    "title": "პარამეტრები",
+    "preference": "მართვა",
+    "language": "ენა",
+    "changeLanguage": "ენის შეცვლა",
+    "ka": "ქართული",
+    "en": "English"
+  },
+  "common": {
+    "retry": "სცადეთ ხელახლა",
+    "back": "უკან",
+    "close": "დახურვა",
+    "loadError": "მონაცემების ჩატვირთვა ვერ მოხერხდა",
+    "empty": "მონაცემები არ მოიძებნა",
+    "eventNotFound": "მოვლენა ვერ მოიძებნა",
+    "unknownError": "უცნობი შეცდომა"
+  },
+  "errors": {
+    "networkHint": "შეამოწმეთ: ინტერნეტი, dev server (npx expo start -c), ტელეფონი და კომპიუტერი ერთ Wi‑Fi-ზე."
+  }
+}

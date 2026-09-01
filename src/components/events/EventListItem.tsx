@@ -1,29 +1,34 @@
 import { Pressable, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { ThemedText } from '@/components/themed-text';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import { useEventRegion } from '@/src/hooks/useEventRegion';
 import type { EarthquakeEvent } from '@/src/types/earthquake';
 import { formatUtcDate, formatUtcTime } from '@/src/utils/format';
 import { magnitudeColor } from '@/src/utils/magnitude';
 
-const LABEL_WIDTH = 76;
+const LABEL_WIDTH = 88;
 
 type EventListItemProps = {
   event: EarthquakeEvent;
+  onPress?: () => void;
 };
 
-export function EventListItem({ event }: EventListItemProps) {
+export function EventListItem({ event, onPress }: EventListItemProps) {
+  const { t } = useTranslation();
+  const region = useEventRegion(event);
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const borderColor = useThemeColor({ light: '#000000', dark: '#ffffff' }, 'text');
 
   return (
-    <Pressable style={[styles.card, { backgroundColor, borderColor }]}>
+    <Pressable style={[styles.card, { backgroundColor, borderColor }]} onPress={onPress}>
       <View style={styles.topRow}>
         <View style={styles.leftColumn}>
           <View style={[styles.fieldRow, { borderColor: textColor }]}>
             <View style={styles.labelCell}>
-              <ThemedText style={[styles.label, { color: textColor }]}>დრო (UTC):</ThemedText>
+              <ThemedText style={[styles.label, { color: textColor }]}>{t('events.timeUtc')}</ThemedText>
             </View>
             <View style={styles.valueCell}>
               <ThemedText style={[styles.value, { color: textColor }]}>
@@ -38,7 +43,7 @@ export function EventListItem({ event }: EventListItemProps) {
 
         <View style={styles.magnitudeColumn}>
           <ThemedText style={[styles.label, styles.magnitudeLabel, { color: textColor }]}>
-            მაგნიტუდა:
+            {t('events.magnitude')}
           </ThemedText>
           <ThemedText style={[styles.magnitude, { color: magnitudeColor(event.magnitude) }]}>
             {event.magnitude ?? '—'}
@@ -48,11 +53,11 @@ export function EventListItem({ event }: EventListItemProps) {
 
       <View style={styles.regionRow}>
         <View style={styles.labelCell}>
-          <ThemedText style={[styles.label, { color: textColor }]}>რეგიონი:</ThemedText>
+          <ThemedText style={[styles.label, { color: textColor }]}>{t('events.location')}</ThemedText>
         </View>
         <View style={styles.regionValueCell}>
           <ThemedText style={[styles.region, { color: textColor }]} numberOfLines={2}>
-            {event.region || '—'}
+            {region || '—'}
           </ThemedText>
         </View>
       </View>

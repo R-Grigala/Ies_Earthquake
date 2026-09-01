@@ -19,5 +19,6 @@ export type EarthquakeEvent = {
   latitude: number;
   longitude: number;
   depth: number | null;
-  region: string;
+  regionGe: string;
+  regionEn: string;
 };

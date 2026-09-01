@@ -26,7 +26,7 @@ app/
 
 src/
   api/
-    client.ts           fetch გარსი, timeout, ApiError
+    client.ts           fetch გარსი, ApiError
     events.ts           /events ენდპოინტი, ნორმალიზება
   config/env.ts         API URL, dev proxy ლოგიკა
   hooks/useEarthquakes.ts
@@ -48,7 +48,9 @@ apiGet('/events')
   ↓
 fetchEarthquakes()  →  EarthquakeEvent[]
   ↓
-useEarthquakes()    →  cache, refetch 60s
+useTabEarthquakes() → cache + ფონური refetch ტაბის focus-ზე
+useEarthquakes()     → cache (დეტალების ეკრანი)
+refetch ხელით       → pull-to-refresh, retry
   ↓
 events.tsx          →  FlatList + EventListItem
 ```
@@ -67,6 +69,7 @@ events.tsx          →  FlatList + EventListItem
 ```
 აპის გახსნა → app/index.tsx → Redirect → /(tabs)/events
 ტაბები: events.tsx ✅, map.tsx ✅
+მარშრუტი: event/[id].tsx ✅
 ```
 
-მომავალში დაემატება: `settings.tsx`, `event/[id].tsx`.
+მომავალში დაემატება: `settings.tsx`.

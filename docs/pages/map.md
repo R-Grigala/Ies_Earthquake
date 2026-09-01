@@ -45,19 +45,20 @@ MARKER_ICONS.older   → Earthquake_yellow.png
 
 ### Callout
 
-მარკერზე დაჭერისას:
+კომპონენტი: `EventMapCallout.tsx`
 
-| ველი | ფორმატი |
+| ელემენტი | აღწერა |
 | --- | --- |
-| დრო (UTC) | `formatUtcDateTime` |
-| გან. / გრძ. | `formatCoordinates` |
-| მაგნიტუდა | `formatMagnitude` |
-| სიღრმე (კმ) | `formatDepth` |
-| რეგიონი | `event.region` (თუ არსებობს) |
+| მაგნიტუდა | დიდი, ფერადი (`magnitudeColor`) |
+| დრო (UTC) | თარიღი + საათი ცალკე ხაზებზე |
+| მდებარეობა | სრული ტექსტი, ცენტრში, რამდენიმე ხაზზე |
+| „დეტალურად" | წითელი ღილაკი → `/event/{id}` |
+
+Callout-ზე დაჭერა გადადის დეტალების ეკრანზე.
 
 ## ლეგენდა (`MapLegend`)
 
-ქვედა ოვერლეი — სამი ასაკის აიკონი იგივე `assets/icons/` ფაილებით:
+ზედა ოვერლეი — სამი ასაკის აიკონი იგივე `assets/icons/` ფაილებით:
 
 | ლეიბლი | აიკონი |
 | --- | --- |
@@ -120,5 +121,5 @@ assets/icons/
 
 - **Expo Go:** რუკა ჩვეულებრივ მუშაობს.
 - **Android production/dev build:** შეიძლება დაგჭირდეთ Google Maps API key `app.json`-ში (`android.config.googleMaps.apiKey`).
-- Callout-ზე დაჭერა ჯერ დეტალების ეკრანზე არ გადადის.
+- Callout-ზე დაჭერა გადადის დეტალების ეკრანზე (`/event/{id}`).
 - ახალი აიკონების ნახვისთვის: `npx expo start -c` (cache გასუფთავება).

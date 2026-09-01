@@ -19,8 +19,8 @@
 - `EventListItem` — GNSMC-ის ცხრილის სტილი:
   - დრო (UTC) — ორ ხაზად (თარიღი + საათი)
   - მაგნიტუდა — მარჯვნივ, ფერად
-  - რეგიონი — ქვედა რიგი
-  - ლეიბლები მარცხნივ გასწორებული (76px სვეტი)
+  - მდებარეობა — ქვედა რიგი
+  - ლეიბლები მარცხნივ გასწორებული (88px სვეტი)
 
 ## ✅ ნაბიჯი 4 — API / SSL გადაწყვეტა
 
@@ -33,13 +33,20 @@
 
 - `react-native-maps` — MapView, hybrid რუკა
 - `app/(tabs)/map.tsx` — რუკის ეკრანი, loading/error/empty
-- `EarthquakeMap` — GNSMC აიკონები (`Earthquake_gif.gif` / `Earthquake_red.png` / `Earthquake_yellow.png`), callout (დრო, კოორდინატები, მაგნიტუდა, სიღრმე, რეგიონი)
+- `EarthquakeMap` — GNSMC აიკონები, callout (დრო, მდებარეობა, მაგნიტუდა)
 - `MapLegend` — ასაკის ლეგენდა იგივე აიკონებით (ქართული)
 - `app/(tabs)/_layout.tsx` — events + map ტაბები, `list-outline.png` / `earth-outline.png` აიკონები (`#7a0002` აქტიური ფერი)
 
+## ✅ ნაბიჯი 6 — მიწისძვრის დეტალები
+
+- `app/event/[id].tsx` — დეტალების ეკრანი (GNSMC სტილი: რუკა + ველები)
+- `EventDetailMap` — hybrid მინი-რუკა, ერთი მარკერი
+- `EventDetailContent` — დრო, მაგნიტუდა, სიღრმე, კოორდინატები, მდებარეობა
+- `useEarthquake(id)` — cache-იდან ძებნა
+- ნავიგაცია: სიიდან და რუკის callout-იდან
+
 ## 🔜 შემდეგი ნაბიჯები
 
-1. `app/event/[id].tsx` — მოვლენის დეტალები
-2. `app/(tabs)/settings.tsx` — ენა, თემა
-3. Push ნოტიფიკაციები
-4. Production SSL ან backend proxy ვალიდური სერტიფიკატით
+1. `app/(tabs)/settings.tsx` — ენა, თემა
+2. Push ნოტიფიკაციები
+3. Production SSL ან backend proxy ვალიდური სერტიფიკატით

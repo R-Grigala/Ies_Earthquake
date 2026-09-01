@@ -56,10 +56,11 @@ https://iesdata.iliauni.edu.ge:2026/api
 
 | პარამეტრი | მნიშვნელობა |
 | --- | --- |
-| `staleTime` | 30 წამი |
-| `refetchInterval` | 60 წამი |
+| `staleTime` | `Infinity` — ავტომატური განახლება არ ხდება |
+| `refetchOnMount/WindowFocus/Reconnect` | გამორთული |
+| refetch | ტაბის focus-ზე ფონუში (`useTabEarthquakes`) ან ხელით (pull-to-refresh, retry) |
 | `retry` | 2 |
 
 ## შეცდომები
 
-`ApiError` — HTTP შეცდომა, timeout (15 წმ), ან ქსელის შეცდომა. UI-ზე ჩანს დეტალური ტექსტი + „სცადეთ ხელახლა".
+`ApiError` — HTTP შეცდომა ან ქსელის შეცდომა. UI-ზე ჩანს დეტალური ტექსტი + „სცადეთ ხელახლა".

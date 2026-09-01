@@ -1,0 +1,56 @@
+{
+  "tabs": {
+    "events": "Earthquakes",
+    "map": "Map",
+    "settings": "Settings"
+  },
+  "events": {
+    "title": "Latest Earthquakes",
+    "timeUtc": "Time (UTC):",
+    "magnitude": "Magnitude:",
+    "location": "Location:"
+  },
+  "map": {
+    "title": "Seismic Map"
+  },
+  "eventDetail": {
+    "title": "Earthquake",
+    "timeUtc": "Time (UTC):",
+    "magnitude": "Magnitude:",
+    "depthKm": "Depth (km):",
+    "coordinates": "Lat. / Long.:",
+    "location": "Location:"
+  },
+  "callout": {
+    "magnitude": "Magnitude",
+    "timeUtc": "Time (UTC)",
+    "location": "Location",
+    "details": "Details"
+  },
+  "legend": {
+    "recent": "Last 7 days",
+    "month": "7–91 days",
+    "older": "91+ days",
+    "selected_recent": "Selected / Last 7 days"
+  },
+  "settings": {
+    "title": "Settings",
+    "preference": "Preferences",
+    "language": "Language",
+    "changeLanguage": "Change language",
+    "ka": "ქართული",
+    "en": "English"
+  },
+  "common": {
+    "retry": "Try again",
+    "back": "Back",
+    "close": "Close",
+    "loadError": "Failed to load data",
+    "empty": "No data found",
+    "eventNotFound": "Event not found",
+    "unknownError": "Unknown error"
+  },
+  "errors": {
+    "networkHint": "Check: internet connection, dev server (npx expo start -c), phone and computer on the same Wi‑Fi."
+  }
+}
