@@ -44,7 +44,10 @@ https://iesdata.iliauni.edu.ge:2026/api
 | `ml` | `magnitude: number \| null` |
 | `latitude`, `longitude` | `number` |
 | `depth` | `depth: number \| null` |
-| `location_ge` / `location_en` / `description` | `region: string` (პრიორიტეტი: `location_ge` → `location_en` → `description`) |
+| `location_ge` | `regionGe: string` |
+| `location_en` | `regionEn: string` |
+
+UI-ზე მდებარეობის ტექსტი: `useEventRegion(event)` → `ka`: `regionGe`, `en`: `regionEn`.
 
 არავალიდური ჩანაწერები (კოორდინატების გარეშე) ფილტრდება.
 

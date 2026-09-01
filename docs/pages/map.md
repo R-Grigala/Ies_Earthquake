@@ -2,17 +2,17 @@
 
 **მარშრუტი:** `app/(tabs)/map.tsx`  
 **სტატუსი:** ✅ მზადაა  
-**კომპონენტები:** `src/components/map/EarthquakeMap.tsx`, `MapLegend.tsx`
+**კომპონენტები:** `src/components/map/EarthquakeMap.tsx`, `MapLegend.tsx`, `EventMapCallout.tsx`
 
 ## დანიშნულება
 
-ინტერაქციული რუკა სეისმური მოვლენების ვიზუალიზაციისთვის. GNSMC-ის `EqMap`-ის მსგავსად — hybrid რუკა, **ლოკალური აიკონები** `assets/icons/`-დან (GNSMC პროექტიდან გადმოტანილი), callout დეტალებით.
+ინტერაქციული რუკა სეისმური მოვლენების ვიზუალიზაციისთვის. GNSMC-ის `EqMap`-ის მსგავსად — hybrid რუკა, **ლოკალური აიკონები** `assets/icons/`-დან, callout დეტალებით.
 
 ## მონაცემები
 
 | წყარო | აღწერა |
 | --- | --- |
-| `useEarthquakes()` | იგივე TanStack Query cache, რაც events სიაში |
+| `useTabEarthquakes()` | იგივე TanStack Query cache + ფონური refetch ტაბის focus-ზე |
 
 ## რუკა (`EarthquakeMap`)
 
@@ -36,35 +36,26 @@
 - **არჩევა:** `src/utils/markerIcon.ts` — `markerIconSource(age)`, `MARKER_ICONS`
 - **Android GIF:** `tracksViewChanges={true}` მხოლოდ ბოლო 7 დღის მოვლენებზე (ანიმაციისთვის)
 
-```ts
-// src/utils/markerIcon.ts
-MARKER_ICONS.recent  → Earthquake_gif.gif
-MARKER_ICONS.month   → Earthquake_red.png
-MARKER_ICONS.older   → Earthquake_yellow.png
-```
-
-### Callout
-
-კომპონენტი: `EventMapCallout.tsx`
+### Callout (`EventMapCallout`)
 
 | ელემენტი | აღწერა |
 | --- | --- |
 | მაგნიტუდა | დიდი, ფერადი (`magnitudeColor`) |
 | დრო (UTC) | თარიღი + საათი ცალკე ხაზებზე |
-| მდებარეობა | სრული ტექსტი, ცენტრში, რამდენიმე ხაზზე |
+| მდებარეობა | `useEventRegion()` — სრული ტექსტი, ცენტრში |
 | „დეტალურად" | წითელი ღილაკი → `/event/{id}` |
 
-Callout-ზე დაჭერა გადადის დეტალების ეკრანზე.
+Callout-ზე დაჭერა (`onCalloutPress`) გადადის დეტალების ეკრანზე. ორმაგი ნავიგაციის თავიდან ასაცილებლად `Callout onPress` არ გამოიყენება.
 
 ## ლეგენდა (`MapLegend`)
 
 ზედა ოვერლეი — სამი ასაკის აიკონი იგივე `assets/icons/` ფაილებით:
 
-| ლეიბლი | აიკონი |
-| --- | --- |
-| ბოლო 7 დღე | `Earthquake_gif.gif` |
-| 7–91 დღე | `Earthquake_red.png` |
-| 91+ დღე | `Earthquake_yellow.png` |
+| ლეიბლი (ka) | ლეიბლი (en) | აიკონი |
+| --- | --- | --- |
+| ბოლო 7 დღე | Last 7 days | `Earthquake_gif.gif` |
+| 7–91 დღე | 7–91 days | `Earthquake_red.png` |
+| 91+ დღე | 91+ days | `Earthquake_yellow.png` |
 
 ფონი და ტექსტი თემის მიხედვით (light/dark).
 
@@ -78,12 +69,13 @@ Callout-ზე დაჭერა გადადის დეტალები
 
 ## ტაბ ბარი
 
-`app/(tabs)/_layout.tsx` — events + map ტაბები, GNSMC PNG აიკონები:
+`app/(tabs)/_layout.tsx` — events + map + settings ტაბები, GNSMC PNG აიკონები:
 
 | ტაბი | აიკონი (`assets/icons/`) |
 | --- | --- |
 | მიწისძვრები | `list-outline.png` |
 | რუკა | `earth-outline.png` |
+| პარამეტრები | `settings-outline.png` |
 
 აქტიური ფერი: `#7a0002`.
 
@@ -98,6 +90,7 @@ assets/icons/
   Earthquake_yellow.png   ← 91+ დღე
   list-outline.png        ← events ტაბი
   earth-outline.png       ← map ტაბი
+  settings-outline.png    ← settings ტაბი
 ```
 
 ## ფაილები
@@ -107,19 +100,12 @@ assets/icons/
 | `app/(tabs)/map.tsx` | ეკრანი, მდგომარეობები, ლეგენდის ოვერლეი |
 | `src/components/map/EarthquakeMap.tsx` | MapView + Image მარკერები |
 | `src/components/map/MapLegend.tsx` | ასაკის ლეგენდა |
+| `src/components/map/EventMapCallout.tsx` | callout UI |
 | `src/utils/markerIcon.ts` | `markerIconSource`, `markerIconSize`, `MARKER_ICONS` |
 | `src/utils/magnitude.ts` | `eventAge` |
-
-## განახლების ისტორია
-
-| თარიღი | ცვლილება |
-| --- | --- |
-| 2026-09 | რუკის ეკრანი, hybrid MapView, callout |
-| 2026-09 | ფერადი წრიული მარკერები → GNSMC ლოკალური აიკონები (`assets/icons/`) |
 
 ## შენიშვნები
 
 - **Expo Go:** რუკა ჩვეულებრივ მუშაობს.
 - **Android production/dev build:** შეიძლება დაგჭირდეთ Google Maps API key `app.json`-ში (`android.config.googleMaps.apiKey`).
-- Callout-ზე დაჭერა გადადის დეტალების ეკრანზე (`/event/{id}`).
 - ახალი აიკონების ნახვისთვის: `npx expo start -c` (cache გასუფთავება).

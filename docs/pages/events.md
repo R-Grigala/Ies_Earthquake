@@ -14,12 +14,13 @@
 | --- | --- |
 | `useTabEarthquakes()` | ტაბებზე — პირველი ჩატვირთვა + ფონური refetch ტაბის focus-ზე (სპინერი არა) |
 | `useEarthquakes()` | დეტალების ეკრანზე — მხოლოდ cache, ტაბის refetch არა |
+| `useEventRegion(event)` | მდებარეობის ტექსტი ენის მიხედვით |
 
 ## UI
 
 ### სათაური
 
-- ტექსტი: **„უახლესი მიწისძვრები"**
+- ტექსტი: **„უახლესი მიწისძვრები"** / **„Latest earthquakes"** (`t('events.title')`)
 - წითელი/მუქი თემის ფერი, ქვედა საზღვრით (GNSMC სტილი)
 
 ### სიის ერთეული (`EventListItem`)
@@ -39,8 +40,8 @@
 | --- | --- |
 | დრო | ორ ხაზად: `formatUtcDate` + `formatUtcTime`, მარცხნივ |
 | მაგნიტუდა | ~30% სიგანე, ცენტრში, ფერი `magnitudeColor()` |
-| მდებარეობა | `location_ge` API-დან, მაქს. 2 ხაზი |
-| ლეიბლები | 88px სიგანის სვეტი, მარცხნივ გასწორება |
+| მდებარეობა | `useEventRegion()` — `location_ge` (ka) / `location_en` (en) |
+| ლეიბლები | 88px სიგანის სვეტი, მარცხნივ გასწორება, i18n |
 
 ### მაგნიტუდის ფერები
 
@@ -63,7 +64,7 @@
 ## ნავიგაცია
 
 - აპის გახსნა → პირდაპირ ეს ეკრანი (`app/index.tsx` redirect)
-- ერთეულზე დაჭერა — ჯერ არაფერს აკეთებს (დეტალების ეკრანი 🔜)
+- ერთეულზე დაჭერა → `/event/{id}`
 
 ## ფაილები
 
@@ -72,5 +73,6 @@
 | `app/(tabs)/events.tsx` | ეკრანი, FlatList, მდგომარეობები |
 | `src/components/events/EventListItem.tsx` | ერთეულის UI |
 | `src/hooks/useEarthquakes.ts` | მონაცემები |
+| `src/hooks/useEventRegion.ts` | ენის მიხედვით მდებარეობა |
 | `src/utils/format.ts` | UTC თარიღი/დრო |
 | `src/utils/magnitude.ts` | ფერები |

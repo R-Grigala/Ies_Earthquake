@@ -6,6 +6,16 @@
 - npm
 - Expo Go (მობილურზე) ან Android Studio / Xcode ემულატორი
 
+## ძირითადი პაკეტები
+
+| პაკეტი | დანიშნულება |
+| --- | --- |
+| `@tanstack/react-query` | მონაცემთა ქეში |
+| `react-native-maps` | სეისმური რუკა |
+| `i18next`, `react-i18next` | თარგმანები (ka/en) |
+| `expo-localization` | მოწყობილობის ენა |
+| `@react-native-async-storage/async-storage` | არჩეული ენის შენახვა |
+
 ## ინსტალაცია
 
 ```bash

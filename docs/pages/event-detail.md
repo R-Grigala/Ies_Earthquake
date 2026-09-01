@@ -21,16 +21,18 @@
 | წყარო | აღწერა |
 | --- | --- |
 | `useEarthquake(id)` | `useEarthquakes()` cache-იდან `id`-ით ძებნა |
+| `useEventRegion(event)` | მდებარეობა ენის მიხედვით |
 | API | ცალკე endpoint არ სჭირდება |
 
 ## ლეიაუტი (GNSMC სტილი)
 
 ```
 ┌─────────────────────────────┐
-│  ←  მიწისძვრა               │  header
+│  ←  მიწისძვრა               │  header (i18n)
 ├─────────────────────────────┤
+│  [ლეგენდა: არჩეული | 7 დღე] │  MapLegend variant="detail"
 │                             │
-│      მინი-რუკა (flex: 3)    │  hybrid MapView, ერთი მარკერი
+│      მინი-რუკა (flex: 3)    │  hybrid MapView, ყველა მარკერი
 │                             │
 ├─────────────────────────────┤
 │ დრო (UTC):    28-08-2026    │
@@ -48,9 +50,9 @@
 | --- | --- |
 | `mapType` | `hybrid` |
 | ცენტრი | არჩეული მოვლენის კოორდინატები |
-| zoom | `latitudeDelta` / `longitudeDelta` = 0.45 (ახლო ზუმი არჩეულ მოვლენაზე) |
+| zoom | `latitudeDelta` / `longitudeDelta` = 0.45 (ახლო ზუმი) |
 | მარკერები | ყველა მოვლენა; არჩეული — ყოველთვის `Earthquake_gif.gif`, სხვები — ასაკის მიხედვით |
-| ლეგენდა | `MapLegend variant="detail"` — gif: **არჩეული** + **ბოლო 7 დღე** |
+| ლეგენდა | `MapLegend variant="detail"` — **არჩეული** + **ბოლო 7 დღე** (ცალკე ელემენტები) |
 
 ## დეტალები (`EventDetailContent`)
 
@@ -60,7 +62,7 @@
 | მაგნიტუდა | ფერადი (`magnitudeColor`) |
 | სიღრმე (კმ) | `formatDepth` |
 | გან. / გრძ. | `formatCoordinates` |
-| მდებარეობა | `event.region` |
+| მდებარეობა | `useEventRegion(event)` — `regionGe` / `regionEn` |
 
 ## მდგომარეობები
 
@@ -76,5 +78,7 @@
 | --- | --- |
 | `app/event/[id].tsx` | ეკრანი, header, მდგომარეობები |
 | `src/hooks/useEarthquake.ts` | cache-იდან ერთი მოვლენის ძებნა |
+| `src/hooks/useEventRegion.ts` | ენის მიხედვით მდებარეობა |
 | `src/components/events/EventDetailMap.tsx` | მინი-რუკა |
 | `src/components/events/EventDetailContent.tsx` | დეტალების ველები |
+| `src/components/map/MapLegend.tsx` | ლეგენდა (detail variant) |
