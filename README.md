@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# Ies_Earthquake
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+მობილური აპლიკაცია სეისმური მოვლენების მონიტორინგისთვის — IES (ილიას სახელმწიფო უნივერსიტეტი).
 
-## Get started
+## მიმდინარე ფუნქციონალი
 
-1. Install dependencies
+- **მიწისძვრების სია** — IES API-დან, pull-to-refresh, GNSMC-ის სტილის UI
 
-   ```bash
-   npm install
-   ```
+მომავალში: რუკა, დეტალები, პარამეტრები, ნოტიფიკაციები.
 
-2. Start the app
+## დოკუმენტაცია
 
-   ```bash
-   npx expo start
-   ```
+სრული დოკუმენტაცია: **[docs/README.md](./docs/README.md)**
 
-In the output, you'll find options to open the app in a
+| | |
+| --- | --- |
+| გაშვება | [docs/getting-started.md](./docs/getting-started.md) |
+| არქიტექტურა | [docs/architecture.md](./docs/architecture.md) |
+| API | [docs/api.md](./docs/api.md) |
+| Events ეკრანი | [docs/pages/events.md](./docs/pages/events.md) |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## სწრაფი გაშვება
 
 ```bash
-npm run reset-project
+npm install
+cp .env.example .env
+npx expo start -c
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+ტელეფონი და კომპიუტერი იგივე Wi‑Fi-ზე უნდა იყოს (dev proxy).
 
-## Learn more
+## სტეკი
 
-To learn more about developing your project with Expo, look at the following resources:
+Expo 54 · expo-router · TypeScript · TanStack Query
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## სტრუქტურა
 
-## Join the community
+```
+app/          ეკრანები (expo-router)
+src/          API, hooks, components, utils
+docs/         დოკუმენტაცია
+```
 
-Join our community of developers creating universal apps.
+## მონაცემთა წყარო
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+https://iesdata.iliauni.edu.ge:2026/api/events
+```
