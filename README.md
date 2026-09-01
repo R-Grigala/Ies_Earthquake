@@ -1,45 +1,50 @@
-# Ies_Earthquake
+# Welcome to your Expo app 👋
 
-Ies_Earthquake is a mobile application for monitoring and visualizing seismic events, providing real-time earthquake data, interactive maps, event details, and notifications.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-Detailed documentation lives in [docs/](./docs/README.md) — setup, architecture,
-API reference, and a page-by-page description of every screen.
+## Get started
 
-## Stack
+1. Install dependencies
 
-- Expo + expo-router (TypeScript)
-- TanStack Query for data fetching and caching
-- react-native-maps for the interactive map
-- i18next / react-i18next for Georgian and English localization
+   ```bash
+   npm install
+   ```
 
-## Setup
+2. Start the app
+
+   ```bash
+   npx expo start
+   ```
+
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
 
 ```bash
-npx create-expo-app@latest . --template tabs --no-install
-npx expo install @tanstack/react-query react-native-maps @react-native-async-storage/async-storage i18next react-i18next expo-localization
-npm install
-cp .env.example .env
-npx expo start
+npm run reset-project
 ```
 
-Fill `EXPO_PUBLIC_API_TOKEN` in `.env` before starting; the API requires a `Token` authorization header.
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Project structure
+## Learn more
 
-```
-app/            expo-router screens (tabs: list, map, settings + event details)
-docs/           project documentation (steps, architecture, pages)
-src/api/        HTTP client and endpoint wrappers
-src/hooks/      TanStack Query hooks
-src/i18n/       i18next setup and ka/en translations
-src/theme/      theme palette and provider
-src/types/      shared domain types
-src/utils/      date formatting and magnitude helpers
-```
+To learn more about developing your project with Expo, look at the following resources:
 
-## Data source
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-Events come from the IES (Ilia State University seismic monitoring centre) API at
-`EXPO_PUBLIC_API_BASE_URL`, endpoint `/events`. Each event carries `origin_time`,
-`ml` (local magnitude), `latitude`, `longitude`, `depth` and `description`.
-Times from the API are UTC and are displayed as such.
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
