@@ -1,13 +1,8 @@
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 
+import { EventMapCallout } from '@/src/components/map/EventMapCallout';
 import type { EarthquakeEvent } from '@/src/types/earthquake';
-import {
-  formatCoordinates,
-  formatDepth,
-  formatMagnitude,
-  formatUtcDateTime,
-} from '@/src/utils/format';
 import { eventAge } from '@/src/utils/magnitude';
 import { markerIconSize, markerIconSource } from '@/src/utils/markerIcon';
 
@@ -20,9 +15,10 @@ const INITIAL_REGION = {
 
 type EarthquakeMapProps = {
   events: EarthquakeEvent[];
+  onEventPress?: (event: EarthquakeEvent) => void;
 };
 
-export function EarthquakeMap({ events }: EarthquakeMapProps) {
+export function EarthquakeMap({ events, onEventPress }: EarthquakeMapProps) {
   return (
     <MapView style={styles.map} initialRegion={INITIAL_REGION} mapType="hybrid">
       {events.map((event) => {
@@ -33,31 +29,15 @@ export function EarthquakeMap({ events }: EarthquakeMapProps) {
           <Marker
             key={event.id}
             coordinate={{ latitude: event.latitude, longitude: event.longitude }}
-            tracksViewChanges={Platform.OS === 'android' && age === 'recent'}>
+            tracksViewChanges={Platform.OS === 'android' && age === 'recent'}
+            onCalloutPress={() => onEventPress?.(event)}>
             <Image
               source={markerIconSource(age)}
               style={{ width: size, height: size }}
               resizeMode="contain"
             />
-            <Callout>
-              <View style={styles.callout}>
-                <Text style={styles.calloutLabel}>დრო (UTC):</Text>
-                <Text style={styles.calloutValue}>{formatUtcDateTime(event.originTime)}</Text>
-                <Text style={styles.calloutLabel}>გან. / გრძ.:</Text>
-                <Text style={styles.calloutValue}>
-                  {formatCoordinates(event.latitude, event.longitude)}
-                </Text>
-                <Text style={styles.calloutLabel}>მაგნიტუდა:</Text>
-                <Text style={styles.calloutValue}>{formatMagnitude(event.magnitude)}</Text>
-                <Text style={styles.calloutLabel}>სიღრმე (კმ):</Text>
-                <Text style={styles.calloutValue}>{formatDepth(event.depth)}</Text>
-                {event.region ? (
-                  <>
-                    <Text style={styles.calloutLabel}>რეგიონი:</Text>
-                    <Text style={styles.calloutValue}>{event.region}</Text>
-                  </>
-                ) : null}
-              </View>
+            <Callout tooltip={false}>
+              <EventMapCallout event={event} />
             </Callout>
           </Marker>
         );
@@ -69,22 +49,5 @@ export function EarthquakeMap({ events }: EarthquakeMapProps) {
 const styles = StyleSheet.create({
   map: {
     flex: 1,
-  },
-  callout: {
-    minWidth: 200,
-    maxWidth: 260,
-    padding: 8,
-    gap: 2,
-  },
-  calloutLabel: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#1c1c1e',
-  },
-  calloutValue: {
-    fontSize: 13,
-    fontWeight: '600',
-    marginBottom: 4,
-    color: '#1c1c1e',
   },
 });

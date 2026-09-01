@@ -10,25 +10,19 @@ export class ApiError extends Error {
   }
 }
 
-const REQUEST_TIMEOUT_MS = 15_000;
-
 export async function apiGet<T>(path: string, signal?: AbortSignal): Promise<T> {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  signal?.addEventListener('abort', () => controller.abort());
+  const url = `${env.apiBaseUrl}${path}`;
+  if (__DEV__) {
+    console.log('[API]', url);
+  }
 
   try {
-    const url = `${env.apiBaseUrl}${path}`;
-    if (__DEV__) {
-      console.log('[API]', url);
-    }
-
     const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
         ...(env.apiToken ? { Authorization: `Token ${env.apiToken}` } : {}),
       },
-      signal: controller.signal,
+      signal,
     });
 
     if (!response.ok) {
@@ -39,10 +33,8 @@ export async function apiGet<T>(path: string, signal?: AbortSignal): Promise<T> 
   } catch (error) {
     if (error instanceof ApiError) throw error;
     if (error instanceof Error && error.name === 'AbortError') {
-      throw new ApiError(`Request to ${path} timed out`);
+      throw new ApiError(`Request to ${path} was cancelled`);
     }
     throw new ApiError(error instanceof Error ? error.message : 'Network request failed');
-  } finally {
-    clearTimeout(timeout);
   }
 }

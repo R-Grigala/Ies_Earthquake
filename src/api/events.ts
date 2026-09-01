@@ -13,8 +13,12 @@ function parseOriginTime(value: string): Date {
   return new Date(hasTimezone ? value : `${value}Z`);
 }
 
-function pickRegion(dto: EarthquakeEventDto): string {
-  return dto.location_ge?.trim() || dto.location_en?.trim() || dto.description?.trim() || '';
+function pickRegions(dto: EarthquakeEventDto): { regionGe: string; regionEn: string } {
+  const fallback = dto.description?.trim() || '';
+  return {
+    regionGe: dto.location_ge?.trim() || fallback,
+    regionEn: dto.location_en?.trim() || fallback,
+  };
 }
 
 function normalize(dto: EarthquakeEventDto): EarthquakeEvent | null {
@@ -26,6 +30,8 @@ function normalize(dto: EarthquakeEventDto): EarthquakeEvent | null {
     return null;
   }
 
+  const { regionGe, regionEn } = pickRegions(dto);
+
   return {
     id: String(dto.id),
     originTime,
@@ -33,7 +39,8 @@ function normalize(dto: EarthquakeEventDto): EarthquakeEvent | null {
     latitude,
     longitude,
     depth: toNumber(dto.depth),
-    region: pickRegion(dto),
+    regionGe,
+    regionEn,
   };
 }
 

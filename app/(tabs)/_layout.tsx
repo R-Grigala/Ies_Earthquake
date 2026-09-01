@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Image } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -19,6 +20,7 @@ function tabIcon(source: number, focused: boolean, color: string) {
 }
 
 export default function TabLayout() {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const inactiveColor = colorScheme === 'dark' ? '#9BA1A6' : '#687076';
 
@@ -34,7 +36,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="events"
         options={{
-          title: 'მიწისძვრები',
+          title: t('tabs.events'),
           tabBarIcon: ({ color, focused }) =>
             tabIcon(require('@/assets/icons/list-outline.png'), focused, color),
         }}
@@ -42,11 +44,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="map"
         options={{
-          title: 'რუკა',
+          title: t('tabs.map'),
           tabBarIcon: ({ color, focused }) =>
             tabIcon(require('@/assets/icons/earth-outline.png'), focused, color),
         }}
       />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: t('tabs.settings'),
+          tabBarIcon: ({ color, focused }) =>
+            tabIcon(require('@/assets/icons/settings-outline.png'), focused, color),
+        }}
+      />
+      <Tabs.Screen name="explore" options={{ href: null }} />
+      <Tabs.Screen name="index" options={{ href: null }} />
     </Tabs>
   );
 }
