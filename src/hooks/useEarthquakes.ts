@@ -1,5 +1,5 @@
-import { useFocusEffect } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
+import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 
 import { fetchEarthquakes } from '@/src/api/events';
