@@ -57,8 +57,6 @@ export default function TabLayout() {
             tabIcon(require('@/assets/icons/settings-outline.png'), focused, color),
         }}
       />
-      <Tabs.Screen name="explore" options={{ href: null }} />
-      <Tabs.Screen name="index" options={{ href: null }} />
     </Tabs>
   );
 }
