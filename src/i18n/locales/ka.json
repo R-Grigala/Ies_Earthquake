@@ -51,6 +51,6 @@
     "unknownError": "უცნობი შეცდომა"
   },
   "errors": {
-    "networkHint": "შეამოწმეთ: ინტერნეტი, dev server (npx expo start -c), ტელეფონი და კომპიუტერი ერთ Wi‑Fi-ზე."
+    "networkHint": "შეამოწმეთ ინტერნეტთან კავშირი და სცადეთ ხელახლა."
   }
 }

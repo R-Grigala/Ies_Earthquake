@@ -50,7 +50,7 @@ npx expo start -c
 ## მონაცემთა წყარო
 
 ```
-https://iesdata.iliauni.edu.ge:2026/api/events
+https://iesdata.iliauni.edu.ge:3030/api/publish_events/
 ```
 
-Dev-ში: `http://<ip>:8081/ies-api/events` → Metro proxy → იგივე IES API.
+აპი პირდაპირ უკავშირდება (ვალიდური SSL), dev-შიც და production-შიც.

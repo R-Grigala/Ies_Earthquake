@@ -34,11 +34,11 @@ cp .env.example .env
 npx expo start -c
 ```
 
-ტელეფონი და კომპიუტერი იგივე Wi‑Fi-ზე უნდა იყოს (dev proxy).
+ტელეფონი და კომპიუტერი იგივე Wi‑Fi-ზე უნდა იყოს (Metro-სთან კავშირისთვის).
 
 ## სტეკი
 
-Expo 54 · expo-router · TypeScript · TanStack Query · react-native-maps · i18next
+Expo 58 · expo-router · TypeScript · TanStack Query · react-native-maps · i18next
 
 ## სტრუქტურა
 
@@ -51,5 +51,5 @@ docs/         დოკუმენტაცია
 ## მონაცემთა წყარო
 
 ```
-https://iesdata.iliauni.edu.ge:2026/api/events
+https://iesdata.iliauni.edu.ge:3030/api/publish_events/
 ```

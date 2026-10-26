@@ -56,8 +56,16 @@
 - `LanguagePickerModal` — bottom sheet ენის ბარათებით
 - ლეიბლი **მდებარეობა** / **Location** (არა „რეგიონი")
 
+## ✅ ნაბიჯი 8 — ახალი მონაცემთა წყარო
+
+- API: `https://iesdata.iliauni.edu.ge:3030/api/publish_events/` (ვალიდური SSL)
+- პასუხი: `{ items: [{ event: {...} }], total, limit }`, მაგნიტუდა `magnitudes[]`-დან (`ML` პრიორიტეტით)
+- Metro proxy, `http-proxy-middleware` და `network_security_config.xml` წაშლილია
+- Expo SDK 58 (React Native 0.88), `i18next` 26 / `react-i18next` 17
+- ტაბების საწყისი route: `unstable_settings.anchor` (SDK 58-ში `Tabs`-ს `initialRouteName` აღარ აქვს)
+
 ## 🔜 შემდეგი ნაბიჯები
 
-1. პარამეტრებში თემის არჩევა (dark/light)
-2. Push ნოტიფიკაციები
-3. Production SSL ან backend proxy ვალიდური სერტიფიკატით
+1. ოფლაინ რეჟიმი (ქეშის შენახვა, ოფლაინ ინდიკატორი)
+2. პარამეტრებში თემის არჩევა (dark/light)
+3. Push ნოტიფიკაციები

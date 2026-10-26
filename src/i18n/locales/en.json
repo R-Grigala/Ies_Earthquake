@@ -51,6 +51,6 @@
     "unknownError": "Unknown error"
   },
   "errors": {
-    "networkHint": "Check: internet connection, dev server (npx expo start -c), phone and computer on the same Wi‑Fi."
+    "networkHint": "Check your internet connection and try again."
   }
 }

@@ -1,7 +1,12 @@
 import { apiGet } from '@/src/api/client';
-import type { EarthquakeEvent, EarthquakeEventDto } from '@/src/types/earthquake';
+import type {
+  EarthquakeEvent,
+  EarthquakeEventDto,
+  MagnitudeDto,
+  PublishedEventsResponse,
+} from '@/src/types/earthquake';
 
-type EventsResponse = EarthquakeEventDto[] | { results: EarthquakeEventDto[] };
+const PREFERRED_MAGNITUDE_CODE = 'ML';
 
 const toNumber = (value: unknown): number | null => {
   const parsed = typeof value === 'string' ? Number(value) : value;
@@ -13,12 +18,20 @@ function parseOriginTime(value: string): Date {
   return new Date(hasTimezone ? value : `${value}Z`);
 }
 
-function pickRegions(dto: EarthquakeEventDto): { regionGe: string; regionEn: string } {
-  const fallback = dto.description?.trim() || '';
-  return {
-    regionGe: dto.location_ge?.trim() || fallback,
-    regionEn: dto.location_en?.trim() || fallback,
-  };
+function pickMagnitude(magnitudes: MagnitudeDto[] | null | undefined): number | null {
+  if (!magnitudes?.length) {
+    return null;
+  }
+  const preferred = magnitudes.find(
+    (item) => item.magnitude?.code?.toUpperCase() === PREFERRED_MAGNITUDE_CODE
+  );
+  for (const item of preferred ? [preferred, ...magnitudes] : magnitudes) {
+    const value = toNumber(item.value);
+    if (value !== null) {
+      return value;
+    }
+  }
+  return null;
 }
 
 function normalize(dto: EarthquakeEventDto): EarthquakeEvent | null {
@@ -30,30 +43,27 @@ function normalize(dto: EarthquakeEventDto): EarthquakeEvent | null {
     return null;
   }
 
-  const { regionGe, regionEn } = pickRegions(dto);
-
   return {
     id: String(dto.id),
     originTime,
-    magnitude: toNumber(dto.ml),
+    magnitude: pickMagnitude(dto.magnitudes),
     latitude,
     longitude,
     depth: toNumber(dto.depth),
-    regionGe,
-    regionEn,
+    regionGe: dto.location_ge?.trim() || '',
+    regionEn: dto.location_en?.trim() || '',
   };
 }
 
 export async function fetchEarthquakes(signal?: AbortSignal): Promise<EarthquakeEvent[]> {
-  const payload = await apiGet<EventsResponse>('/events', signal);
-  const items = Array.isArray(payload) ? payload : payload.results;
+  const payload = await apiGet<PublishedEventsResponse>('/publish_events/', signal);
 
-  if (!items?.length) {
+  if (!payload?.items?.length) {
     return [];
   }
 
-  return items
-    .map(normalize)
+  return payload.items
+    .map((item) => (item.event ? normalize(item.event) : null))
     .filter((event): event is EarthquakeEvent => event !== null)
     .sort((a, b) => b.originTime.getTime() - a.originTime.getTime());
 }
