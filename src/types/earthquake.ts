@@ -1,15 +1,32 @@
+export type MagnitudeDto = {
+  value: number | string | null;
+  magnitude?: { code?: string | null } | null;
+};
+
 export type EarthquakeEventDto = {
   id: number | string;
-  event_id?: number | string;
+  iesdata_id?: number | string | null;
   origin_time: string;
-  ml: number | string | null;
   latitude: number | string;
   longitude: number | string;
   depth: number | string | null;
-  description?: string | null;
   location_ge?: string | null;
   location_en?: string | null;
+  magnitudes?: MagnitudeDto[] | null;
   is_published?: boolean;
+};
+
+export type PublishedEventDto = {
+  id: number | string;
+  event_id: number | string;
+  published_at?: string | null;
+  event: EarthquakeEventDto | null;
+};
+
+export type PublishedEventsResponse = {
+  items: PublishedEventDto[];
+  total?: number;
+  limit?: number;
 };
 
 export type EarthquakeEvent = {

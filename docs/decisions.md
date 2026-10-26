@@ -2,7 +2,7 @@
 
 ## რატომ Expo + expo-router
 
-- ფაილზე დაფუძნებული მარშრუტები, TypeScript, Expo SDK 54
+- ფაილზე დაფუძნებული მარშრუტები, TypeScript, Expo SDK 58
 - `event/[id]` deep link მარტივად
 
 ## რატომ TanStack Query
@@ -20,18 +20,18 @@
 | ცხრილის სტილის სიის ერთეული | API URL `.env`-ში, არა ngrok კოდში |
 | მაგნიტუდის ფერების სქემა | TanStack Query ქეში |
 | სათაური „უახლესი მიწისძვრები" | `location_ge` / `location_en` ველები |
-| GNSMC აიკონები (`assets/icons/`) | Dev Metro proxy (SSL) |
+| GNSMC აიკონები (`assets/icons/`) | `/publish_events/` — მხოლოდ გამოქვეყნებული მოვლენები |
 | Settings ეკრანის სტილი | i18next თარგმანები |
 | | დრო ორ ხაზად (წაკითხვადობა) |
 | | განედი/გრძედი ამოღებულია სიიდან |
 
-## SSL / Dev Proxy
+## მონაცემთა წყარო და SSL
 
-**პრობლემა:** `iesdata.iliauni.edu.ge:2026` self-signed სერტიფიკატს იყენებს — React Native `fetch` ვერ უკავშირდება.
+**ადრე:** `iesdata.iliauni.edu.ge:2026/api/events` — self-signed სერტიფიკატი, ამიტომ dev-ში Metro proxy გამოიყენებოდა, production კი არ მუშაობდა.
 
-**გადაწყვეტა (dev):** Metro middleware პროქსირებს `http://<dev-host>/ies-api/*` → `https://iesdata.iliauni.edu.ge:2026/api/*` (`secure: false`).
+**ახლა:** `iesdata.iliauni.edu.ge:3030/api/publish_events/` — Let's Encrypt სერტიფიკატი. აპი პირდაპირ უკავშირდება, proxy წაშლილია.
 
-**Production:** საჭიროა ვალიდური SSL სერვერზე ან შუამავალი API.
+**მაგნიტუდა:** მოვლენას შეიძლება რამდენიმე ჰქონდეს (`ML`, `MW`, `K`, `MPV`). აპი აჩვენებს `ML`-ს (როგორც ძველი API-ს `ml`), თუ არ არის — პირველს.
 
 ## i18n
 

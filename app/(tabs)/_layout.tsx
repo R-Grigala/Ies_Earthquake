@@ -1,12 +1,16 @@
 import { Tabs } from 'expo-router';
-import { Image } from 'react-native';
+import { Image, type ColorValue } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 const TAB_ACTIVE_COLOR = '#7a0002';
 
-function tabIcon(source: number, focused: boolean, color: string) {
+export const unstable_settings = {
+  anchor: 'events',
+};
+
+function tabIcon(source: number, focused: boolean, color: ColorValue) {
   return (
     <Image
       source={source}
@@ -26,7 +30,6 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      initialRouteName="events"
       screenOptions={{
         tabBarActiveTintColor: TAB_ACTIVE_COLOR,
         tabBarInactiveTintColor: inactiveColor,

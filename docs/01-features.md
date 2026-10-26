@@ -16,7 +16,7 @@
 
 **მიწისძვრების სია**, **სეისმური რუკა**, **დეტალების ეკრანი** და **პარამეტრები (ენა)** იმპლემენტირებულია:
 
-- IES API `/events` (საერთო TanStack Query cache)
+- IES API `/publish_events/` (საერთო TanStack Query cache)
 - Pull-to-refresh (სია) + ფონური refetch ტაბის focus-ზე
 - Loading / error / empty მდგომარეობები
 - GNSMC-ის სტილის სიის ერთეული
@@ -24,7 +24,6 @@
 - მოვლენის დეტალები — მინი-რუკა (ყველა მარკერი) + ველები (GNSMC სტილი)
 - Events + Map + Settings ტაბები
 - i18n — ქართული / ინგლისური (UI + API მდებარეობა)
-- Dev Metro proxy (SSL)
 - Dark/Light mode (სისტემის მიხედვით)
 
 ## მომავალი ვერსიები

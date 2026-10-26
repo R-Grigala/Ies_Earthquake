@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import '@/src/i18n';
 import { loadSavedLanguage } from '@/src/i18n';
 
 export const unstable_settings = {

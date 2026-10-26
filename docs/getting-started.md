@@ -27,12 +27,10 @@ cp .env.example .env
 
 | ცვლადი | აღწერა |
 | --- | --- |
-| `EXPO_PUBLIC_API_BASE_URL` | API-ის ბაზისური URL (production) |
+| `EXPO_PUBLIC_API_BASE_URL` | API-ის ბაზისური URL (default: `https://iesdata.iliauni.edu.ge:3030/api`) |
 | `EXPO_PUBLIC_API_TOKEN` | ტოკენი, თუ სერვერს სჭირდება |
-| `EXPO_PUBLIC_DEV_API_BASE_URL` | (dev) ხელით proxy URL, თუ ავტო-აღმოჩენა ვერ მუშაობს |
-| `EXPO_PUBLIC_API_PROXY_TARGET` | (dev) Metro proxy-ის სამიზნე სერვერი |
 
-`.env`-ის შეცვლის შემდეგ dev server უნდა გადაიტვირთოს.
+`.env`-ის შეცვლის შემდეგ dev server უნდა გადაიტვირთოს (`npx expo start -c`).
 
 ## გაშვება
 
@@ -40,29 +38,20 @@ cp .env.example .env
 npx expo start -c
 ```
 
-`-c` cache-ის გასუფთავებაა — Metro proxy-ის ცვლილებების შემდეგ აუცილებელია.
-
 ### ფიზიკური მოწყობილობა
 
-- ტელეფონი და კომპიუტერი **იგივე Wi‑Fi-ზე** უნდა იყოს
-- development-ში API მოთხოვნები Metro proxy-ით გადის (`http://<ip>:8081/ies-api/...`)
+- ტელეფონი და კომპიუტერი **იგივე Wi‑Fi-ზე** უნდა იყოს (Metro-სთან კავშირისთვის)
+- API მოთხოვნები ტელეფონიდან პირდაპირ IES სერვერზე მიდის
+- თუ კომპიუტერს რამდენიმე ქსელი აქვს, მიუთითე Wi‑Fi-ის IP:
 
-### Proxy არ მუშაობს?
-
-`.env`-ში ჩაწერე კომპიუტერის IP (`ipconfig`):
-
-```
-EXPO_PUBLIC_DEV_API_BASE_URL=http://192.168.1.XXX:8081/ies-api
+```bash
+REACT_NATIVE_PACKAGER_HOSTNAME=<wifi-ip> npx expo start -c
 ```
 
 ## ხშირი პრობლემები
 
 | სიმპტომი | გამოსავალი |
 | --- | --- |
-| „მონაცემების ჩატვირთვა ვერ მოხერხდა" | `npx expo start -c`, იგივე Wi‑Fi, შეამოწმე proxy URL კონსოლში `[API]` |
-| `Network request failed` | IES სერვერს self-signed SSL აქვს — dev-ში proxy გამოიყენება |
-| ცარიელი სია | API-მ ცარიელი მასივი დააბრუნა — შეამოწმე ქსელი/API |
-
-## SSL შენიშვნა
-
-`iesdata.iliauni.edu.ge:2026` self-signed სერტიფიკატს იყენებს. აპი პირდაპირ HTTPS-ზე მობილურზე production-ში ვერ მიუკავშირდება, სანამ სერვერზე ვალიდური SSL არ დგება. Development-ში `metro.config.js` proxy ამას ბypass-ს აკეთებს.
+| Expo Go ვერ უკავშირდება | იგივე Wi‑Fi, `REACT_NATIVE_PACKAGER_HOSTNAME` |
+| „მონაცემების ჩატვირთვა ვერ მოხერხდა" | ტელეფონზე ინტერნეტი; კონსოლში `[API]` URL; `curl https://iesdata.iliauni.edu.ge:3030/api/publish_events/` |
+| ცარიელი სია | API-მ ცარიელი `items` დააბრუნა |

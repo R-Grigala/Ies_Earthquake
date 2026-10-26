@@ -8,7 +8,7 @@ UI (`app/`) გამოყოფილია ლოგიკისგან (`s
 
 | ტექნოლოგია | ვერსია / დანიშნულება |
 | --- | --- |
-| Expo SDK | 54 |
+| Expo SDK | 58 (React Native 0.88) |
 | expo-router | ფაილზე დაფუძნებული მარშრუტები (tabs + stack) |
 | TypeScript | ტიპიზაცია |
 | TanStack Query | ქეში, loading/error, ხელით/ფონური refetch |
@@ -34,9 +34,9 @@ app/
 src/
   api/
     client.ts              apiGet(), ApiError
-    events.ts              fetchEarthquakes(), ნორმალიზება
+    events.ts              fetchEarthquakes(), ნორმალიზება (/publish_events/)
   config/
-    env.ts                 API URL, dev proxy ლოგიკა
+    env.ts                 API URL
   hooks/
     useEarthquakes.ts      useEarthquakes(), useTabEarthquakes()
     useEarthquake.ts       ერთი მოვლენა cache-იდან
@@ -58,8 +58,6 @@ src/
     getErrorMessage.ts     UI შეცდომის ტექსტი
 
 assets/icons/              GNSMC აიკონები (მარკერები, ტაბები, settings)
-metro.config.js            dev proxy (/ies-api → IES API)
-network_security_config.xml   Android SSL (production build)
 ```
 
 ## მარშრუტიზაცია
@@ -81,14 +79,11 @@ Stack (root)
 ## მონაცემთა ნაკადი
 
 ```
-IES API  (https://iesdata.iliauni.edu.ge:2026/api/events)
+IES API  (https://iesdata.iliauni.edu.ge:3030/api/publish_events/)
   ↓
-  dev: Metro proxy  http://<host>:8081/ies-api/events  →  HTTPS IES
-  production: პირდაპირ EXPO_PUBLIC_API_BASE_URL
+apiGet('/publish_events/')   (პირდაპირ, ვალიდური SSL)
   ↓
-apiGet('/events')
-  ↓
-fetchEarthquakes()  →  EarthquakeEvent[]  (regionGe + regionEn)
+fetchEarthquakes()  →  items[].event  →  EarthquakeEvent[]  (regionGe + regionEn, ML მაგნიტუდა)
   ↓
 TanStack Query cache  (queryKey: ['earthquakes'])
   ↓
@@ -100,14 +95,9 @@ useEventRegion(event) →  ka: location_ge, en: location_en
 UI ეკრანები / კომპონენტები
 ```
 
-## Dev vs Production API
+## API URL
 
-| გარემო | URL აპიდან | რეალური წყარო |
-| --- | --- | --- |
-| `__DEV__` | `http://<hostUri>/ies-api` | იგივე IES API (Metro proxy-ით) |
-| production | `EXPO_PUBLIC_API_BASE_URL` | `https://iesdata.iliauni.edu.ge:2026/api` |
-
-ლოგიკა: `src/config/env.ts` · პროქსი: `metro.config.js`
+dev-ში და production-ში ერთი და იგივე: `EXPO_PUBLIC_API_BASE_URL`, default `https://iesdata.iliauni.edu.ge:3030/api` (`src/config/env.ts`).
 
 ## i18n
 
@@ -151,4 +141,4 @@ settings.tsx ──→ LanguagePickerModal ──→ setAppLanguage
 
 - თემის არჩევა (dark/light) პარამეტრებში
 - Push ნოტიფიკაციები
-- Production SSL / backend proxy
+- ოფლაინ რეჟიმი (ქეშის შენახვა მოწყობილობაზე)
